@@ -1,0 +1,34 @@
+﻿@model TBay.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Најава";
+}
+
+<h2>Најави се</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Login" method="post">
+            <input type="hidden" asp-for="ReturnUrl" />
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" type="password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <hr />
+            <button class="btn btn-primary" type="submit">Најави се</button>
+        </form>
+     </div>    
+</div>
+<br/>
+<p>Немате профил ?  <a asp-controller="Admin" asp-action="Create"> Регистрирај се</a></p>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

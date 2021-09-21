@@ -1,0 +1,36 @@
+@model TBay.Models.Store
+
+@{
+    ViewData["Title"] = "Детали";
+    var photoPath = "~/pictures/" + (Model.Picture);
+}
+
+
+<div style="text-align: left;">
+    <span style="float:right;">
+        <img src="@photoPath"
+             height="300" width="180"
+             asp-append-version="true" />
+
+    </span>
+    <p>@Html.DisplayFor(model => model.Rating)</p>
+    <p style="text-align: center; font-size: larger; font-weight:bold;"> @Html.DisplayFor(model => model.Name)</p>
+    <p>
+        <strong>Items: </strong> <a asp-controller="Item" asp-action="Details" asp-route-id="@Model.ItemId">
+            @Html.DisplayFor(model => model.Item.Name)
+        </a>
+    </p>
+
+    <p>
+        <strong>Link: </strong><a href="@Html.DisplayFor(model => model.Link)">@Html.DisplayFor(model => model.Name)</a>
+
+    </p>
+
+</div>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.StoreID">Измени</a> |
+        <a asp-action="Index">Назад</a>
+    </div>
+}

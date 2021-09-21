@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TBay</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header style="background-color: black;">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-black border-bottom box-shadow mb-3" style="background-color: black;">
+            <div class="container" style="background-color: black;">
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="background-color: black;">
+                    <ul class="navbar-nav flex-grow-1" style="background-color: black;">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">
+                                <img src="https://png.pngtree.com/png-clipart/20190705/original/pngtree-vector-shopping-bag-icon-png-image_4254399.jpg"
+                                     alt="Logo" width="50" height="50">
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" style="font-size: larger; font-weight: bold; color:white;" asp-area="" asp-controller="Item" asp-action="Index">Items </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" style="font-size: larger; font-weight: bold; color: white;" asp-area="" asp-controller="Designer" asp-action="Index">Designers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" style="font-size: larger; font-weight: bold; color: white;" asp-area="" asp-controller="Store" asp-action="Index">Stores</a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                    <li class="nav-item">
+                        <a class="nav-link text-light" style="font-size: larger; font-weight: bold;" asp-area="" asp-controller="Item" asp-action="OrderedItems">Orders</a>
+                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" style="font-size: larger; font-weight: bold;" asp-area="" asp-controller="Admin" asp-action="Index">All Users</a>
+                                    </li>}
+
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container" style="text-align: left;">          
+          &copy; 2021 - TBay 
+            <span style="float:right;">
+                @if (User.Identity.IsAuthenticated)
+                {
+                @(User.Identity.Name)
+                   <a  asp-area="" asp-controller="Account" asp-action="Logout">Log out</a>
+                }
+                else
+                {
+                    <a asp-area="" asp-controller="Account" asp-action="Login">
+                        Log in
+                    </a>
+                }
+            </span>
+         </div>                          
+            
+            
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

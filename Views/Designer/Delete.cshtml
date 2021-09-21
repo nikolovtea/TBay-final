@@ -1,0 +1,54 @@
+@model TBay.Models.Designer
+
+@{
+    ViewData["Title"] = "Избриши";
+}
+
+<h1>Избриши</h1>
+
+<h3>Дали сте сигурни дека сакате да избришете ?</h3>
+<div>
+    <h4>Designer</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DesignerID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DesignerID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateofBirth)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateofBirth)
+        </dd>
+         
+         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Biography)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Biography)
+        </dd>
+     
+         
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="DesignerID" />
+        <input type="submit" value="Избриши" class="btn btn-danger" /> |
+        <a asp-action="Index">Назад</a>
+    </form>
+</div>

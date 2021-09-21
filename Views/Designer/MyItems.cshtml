@@ -1,0 +1,18 @@
+  
+@model IEnumerable<TBay.Models.Item>
+
+<h4>Items he create @ViewData["DesignersName"] </h4>
+<br />
+@foreach (var item in Model)
+{
+        <div style="text-align: center;" >
+        
+                <img src="~/pictures/@item.Picture"
+                     height="240" width="150"
+                     asp-append-version="true"/>   
+            <p> <a  asp-controller="Item" asp-action="Details" asp-route-id="@item.ItemsID"> @Html.DisplayFor(modelItem => item.Name) </a><br/>
+           
+               @Html.DisplayFor(modelItem => item.Price) dollars</p>
+       </div>
+
+}

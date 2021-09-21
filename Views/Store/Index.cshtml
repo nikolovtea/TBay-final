@@ -1,0 +1,59 @@
+@model IEnumerable<TBay.Models.Store>
+
+@{
+    ViewData["Title"] = "Store";
+}
+
+
+
+<h2>Stores</h2>
+<br />
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            <div class="text-center" style="font-size: large; font-weight:bold">
+                Пребарувај по име <input style="border-radius: 15px;border: 1px #000 solid;padding: 5px 5px 5px 25px;" type="text" name="searchString" value="@ViewData["Filter1"]" />
+                <input style="box-sizing: border-box; background-color: orange; font-weight:bold; color: white" type="submit" value="Барај" class="btn btn-default" />
+            </div>
+        </p>
+    </div>
+</form>
+<br />
+
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Add a store</a>
+    </p>
+}
+
+@for (int i = 0; i < Model.Count(); i += 3)
+{
+    <div class="row">
+        @foreach (var item in Model.Skip(i).Take(3))
+        {
+            <div class="col-md-4">
+                <div style="text-align: center;">
+
+
+                    <p>
+                        <img src="~/pictures/@item.Picture"
+                             height="240" width="150"
+                             asp-append-version="true" />
+                    </p>
+
+                    <p><a asp-action="Details" asp-route-id="@item.StoreID"> @Html.DisplayFor(modelItem => item.Name)</a></p>
+
+                    <p> @Html.DisplayFor(modelItem => item.Rating)</p>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <p>
+                            <a asp-action="Edit" asp-route-id="@item.StoreID">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@item.StoreID">Delete</a>
+                        </p>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+}

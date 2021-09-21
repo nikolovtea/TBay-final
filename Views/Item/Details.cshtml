@@ -1,0 +1,68 @@
+@model TBay.Models.Item
+
+@{
+    ViewData["Title"] = "Детали";
+    var photoPath = "~/pictures/" + (Model.Picture);
+}
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-black border-bottom box-shadow mb-3" style="background-color: black;">
+    <div class="container" style="background-color: black;">
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="background-color: black;">
+            <ul class="navbar-nav flex-grow-1" style="background-color: black;">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" style="font-size:larger;font-weight:bold;"
+                       asp-area="" asp-controller="Item" asp-action="Shoes"><div style="color: white;">Shoes</div></a>
+                </li>
+                &ensp;
+                <li class="nav-item">
+                    <a class="nav-link text-dark" style="font-size:larger;font-weight:bold;"
+                       asp-area="" asp-controller="Item" asp-action="Dresses"><div style="color: white;">Dresses</div></a>
+                </li>   &ensp;
+                <li class="nav-item">
+                    <a class="nav-link text-dark" style="font-size:larger;font-weight:bold;"
+                       asp-area="" asp-controller="Item" asp-action="Jeans"><div style="color: white;">Jeans</div></a>
+                </li>   &ensp;
+                <li class="nav-item">
+                    <a class="nav-link text-dark" style="font-size:larger;font-weight:bold;"
+                       asp-area="" asp-controller="Item" asp-action="Sunglasses"><div style="color: white;">Sunglasses</div></a>
+                </li>  &ensp;
+                <li class="nav-item">
+                    <a class="nav-link text-dark" style="font-size:larger;font-weight:bold;"
+                       asp-area="" asp-controller="Item" asp-action="Bags"><div style="color: white;">Bags</div></a>
+                </li>  &ensp;
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div style="text-align: left;">
+    <span style="float:right;">
+        <img src="@photoPath"
+             height="300" width="180"
+             asp-append-version="true" />
+        <p>
+            @Html.DisplayFor(model => model.Size) 
+        </p>
+        <p><strong>Price: </strong>@Html.DisplayFor(model => model.Price) dollars</p>
+    </span>
+    <p style="text-align: center; font-size: larger; font-weight:bold;">@Html.DisplayFor(model => model.Name)</p>
+    <p>
+        <strong>Designer:</strong> <a asp-controller="Designer" asp-action="Details" asp-route-id="@Model.Designerid">
+            @Html.DisplayFor(model => model.Designer.FullName)
+        </a>
+    </p>
+
+   
+   
+    <p>
+        <button class="btn btn-default" type="submit" style="box-sizing: border-box; background-color: orange; "><a style="font-weight: bold; color: white;"  asp-action="Order" asp-route-id="@Model.ItemsID">Order</a></button> 
+    </p>
+</div>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.ItemsID">Измени</a> |
+        
+        <a asp-action="Index">Назад</a>
+    </div>
+}

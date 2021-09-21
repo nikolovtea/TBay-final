@@ -1,0 +1,52 @@
+@model TBay.Models.User
+
+@{
+    ViewData["Title"] = "Порачај";
+}
+
+<h1>Пополнете со ваши податоци</h1>
+
+
+
+<hr />
+        Item:<h5> @ViewData["ItemName"]</h5>
+        <img src="@ViewData["Image"]"
+             height="180" width="100"
+             asp-append-version="true" />
+        <h5>  @ViewData["ItemPrice"]  dollars</h5>
+<br/>
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Order">
+                    <div class="form-group">
+                        <label asp-for="FullName" class="control-label"></label>
+                        <input asp-for="FullName" class="form-control" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber" class="control-label"></label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Address" class="control-label"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="City" class="control-label"></label>
+                        <input asp-for="City" class="form-control" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Порачај" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }

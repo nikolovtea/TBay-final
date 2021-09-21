@@ -1,0 +1,31 @@
+@model TBay.Models.Designer
+
+@{
+    ViewData["Title"] = "Детали";
+    var photoPath = "~/pictures/" + (Model.Picture);
+}
+
+<div style="text-align: left;">
+    <span style="float:right;">
+        <img src="@photoPath"
+             height="300" width="180"
+             asp-append-version="true" />
+    </span>
+    <p style="text-align: center;font-size: larger; font-weight:bold; "> @Html.DisplayFor(model => model.FullName)</p>
+    <p><strong> Дата на раѓање: </strong>@Html.DisplayFor(model => model.DateofBirth)</p>
+    
+    <p>@Html.DisplayFor(model => model.Biography)</p>
+    
+    <p>
+        <a asp-controller="Designer" asp-action="MyItems" asp-route-id="@Model.DesignerID">
+            <strong>Items</strong>
+        </a>: @Html.DisplayFor(model => model.Items)
+    </p>
+</div>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.DesignerID">Edit</a> |
+        <a asp-action="Index">Назад</a>
+    </div>
+}
